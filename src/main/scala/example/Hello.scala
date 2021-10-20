@@ -11,6 +11,13 @@ object Hello extends Greeting with App {
   val uciMoves = List.range(0, legalMoves.size()).map(i => legalMoves.get(i).getString())
   println(uciMoves)
   uciMoves.map(m => println(FairyStockfish.getFEN(variant, initFen, new FairyStockfish.VectorOfStrings(m))))
+
+  val piecesOnBoard = FairyStockfish.piecesOnBoard(variant, initFen)
+  var first = piecesOnBoard.begin();
+  while(!first.equals(piecesOnBoard.end())) {
+    println(s"${first.first().getString()} -> ${first.second().pieceInfo().name().getString()}")
+    first = first.increment();
+  }
 }
 
 trait Greeting {
